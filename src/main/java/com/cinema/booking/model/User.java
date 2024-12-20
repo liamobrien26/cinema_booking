@@ -9,26 +9,35 @@ public class User {
     @Id
     private String id;
     private String username;
-    private String password;
+    private String password;  // Add a password field to store the user's password
 
+    // Getter for id
     public String getId() {
         return id;
     }
 
+    // Setter for id
     public void setId(String id) {
         this.id = id;
     }
 
+    // Getter for username
     public String getUsername() {
         return username;
     }
 
+    // Setter for username
     public void setUsername(String username) {
         this.username = username;
     }
 
+    // Getter for password
+    public String getPassword() {
+        return password;
+    }
 
+    // Setter for password
     public void setPassword(String password) {
-        this.password = password;
+        this.password = password;  // Set the password field to the given value
     }
 }
