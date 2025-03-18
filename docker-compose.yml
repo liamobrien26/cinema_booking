@@ -1,0 +1,10 @@
+version: "3.1"
+
+services:
+  cinema-db:
+    image: mongo:5.0
+    restart: no
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: CinemaBooking

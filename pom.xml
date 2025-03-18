@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.cinema</groupId>
-	<artifactId>booking</artifactId>
+	<artifactId>cinema_booking</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>cinema_booking</name>
 	<description>cinema_booking</description>
@@ -53,6 +53,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.36</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
