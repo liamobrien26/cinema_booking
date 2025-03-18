@@ -9,16 +9,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
+
 import static com.cinema.booking.properties.Urls.CANCEL_BOOKING;
 import static com.cinema.booking.properties.Urls.CREATE_NEW_BOOKING;
 import static com.cinema.booking.properties.Urls.GET_ALL_BOOKINGS;
 import static com.cinema.booking.properties.Urls.GET_BOOKING_BY_BOOKING_ID;
 
 @RestController
+@RequiredArgsConstructor
 public class BookingController {
 
-    @Autowired
-    private BookingRepository bookingRepository;
+    private final BookingRepository bookingRepository;
 
     @PostMapping(CREATE_NEW_BOOKING)
     public String createNewBooking(@RequestParam String bookingId,
