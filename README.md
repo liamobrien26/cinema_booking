@@ -2,13 +2,13 @@
 
 This Java/Spring Boot project is developed for Cinema Booking.
 
-## Technologies Used
+## Technologies used
 
 - **Maven**: Build automation tool for managing dependencies and building the project.
 - **Mustache**: Template engine for rendering views in the application.
 - **MongoDB**: NoSQL database used for data storage and management.
 
-## QuickStart Instructions
+## QuickStart instructions
 
 
 
