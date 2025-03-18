@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create new booking</title>
+</head>
+<body>
+<h1>MyCinema Make a booking</h1>
+
+<form action="/create-new-booking" method="post">
+  <label for="selectMovie">Select movie:</label>
+  <input type="text" id="selectMovie" name="selectMovie" required>
+  <br>
+
+  <label for="selectMovieTime">Select movie time:</label>
+  <input type="text" id="selectMovieTime" name="selectMovieTime" required>
+  <br>
+
+  <label for="seats">Select seats:</label>
+  <input type="text" id="seats" name="seats">
+  <br>
+
+  <label for="numberOfTickets">Number of tickets:</label>
+  <input type="number" id="numberOfTickets" name="numberOfTickets">
+  <br>
+
+  <label for="totalPrice">Total price:</label>
+  <input type="number" id="totalPrice" name="totalPrice">
+  <br>
+
+  <button type="submit">Book</button>
+  <button type="reset">Reset</button>
+</form>
+
+<p><a href="/">Log out</a></p>
+
+</body>
+</html>

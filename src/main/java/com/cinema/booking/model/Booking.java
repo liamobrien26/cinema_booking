@@ -10,10 +10,12 @@ public class Booking {
 
     private String bookingId;
     private String userId;
-    private Integer movieId;
+    private String movieId;
+    private String selectMovie;
+    private String selectMovieTime;
     private String seats;
     private Integer numberOfTickets;
     private Float totalPrice;
     private String bookingStatus;
-    private Integer bookingCreatedDate;
+    private String bookingCreatedDate;
 }
