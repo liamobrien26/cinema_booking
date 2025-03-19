@@ -1,0 +1,25 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>List of bookings</title>
+</head>
+<body>
+<h1>All bookings at MyCinema</h1>
+
+{{#bookings}} {{! this is a for loop}}
+  <ul>
+    <li>Booking ID: {{bookingId}}</li>
+    <li>User ID: {{userId}}</li>
+    <li>Movie selected: {{selectMovie}}</li>
+    <li>Movie time selected: {{selectMovieTime}}</li>
+    <li>Allocated seats: {{seats}}</li>
+    <li>Number of tickets: {{numberOfTickets}}</li>
+    <li>Total price: £{{totalPrice}}</li>
+    <li>Date of booking created: {{bookingCreatedDate}}</li>
+  </ul>
+{{/bookings}}
+
+<p>Home page <a href="landing-page">Click Here</a></p>
+<p><a href="/">Log out</a></p>
+</body>
+</html>

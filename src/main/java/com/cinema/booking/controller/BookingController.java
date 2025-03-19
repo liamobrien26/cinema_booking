@@ -5,12 +5,12 @@ import com.cinema.booking.repository.BookingRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import lombok.RequiredArgsConstructor;
@@ -28,6 +28,13 @@ public class BookingController {
 
     private static final String CREATE_NEW_BOOKING_VIEW_NAME = "create-new-booking-page";
     private static final String GET_ALL_BOOKINGS_VIEW_NAME = "view-booking-page";
+    private static final String GET_ALL_BOOKINGS_MODEL_NAME = "bookings"; //Get object from database
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("E, MMM dd yyyy HH:mm");
+
+    public String formatBookingCreatedDate(){
+        LocalDateTime update = LocalDateTime.now();
+        return update.format(DATE_TIME_FORMATTER);
+    }
 
     @GetMapping(CREATE_NEW_BOOKING)
     public ModelAndView getCreateNewBookingPage() {
@@ -35,7 +42,7 @@ public class BookingController {
     }
 
     @PostMapping(CREATE_NEW_BOOKING)
-    public ModelAndView createNewBooking(@RequestBody String selectMovie,
+    public ModelAndView createNewBooking(@RequestParam String selectMovie,
                                          @RequestParam String selectMovieTime,
                                          @RequestParam String seats,
                                          @RequestParam Integer numberOfTickets,
@@ -50,15 +57,17 @@ public class BookingController {
         booking.setSeats(seats);
         booking.setNumberOfTickets(numberOfTickets);
         booking.setTotalPrice(totalPrice);
-        booking.setBookingStatus(null);
-        booking.setBookingCreatedDate(LocalDateTime.now().toString());
+//        booking.setBookingStatus("Confirmed");
+        booking.setBookingCreatedDate(formatBookingCreatedDate());
         bookingRepository.save(booking);
         return new ModelAndView(CREATE_NEW_BOOKING_VIEW_NAME);
     }
 
     @GetMapping(GET_ALL_BOOKINGS)
     public ModelAndView getAllBooking() {
-        return new ModelAndView(GET_ALL_BOOKINGS_VIEW_NAME);
+        return new ModelAndView(GET_ALL_BOOKINGS_VIEW_NAME,
+                                GET_ALL_BOOKINGS_MODEL_NAME,
+                                bookingRepository.findAll());
     }
 
     @GetMapping(GET_BOOKING_BY_BOOKING_ID)

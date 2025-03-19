@@ -16,6 +16,6 @@ public class Booking {
     private String seats;
     private Integer numberOfTickets;
     private Float totalPrice;
-    private String bookingStatus;
+//    private String bookingStatus;
     private String bookingCreatedDate;
 }
