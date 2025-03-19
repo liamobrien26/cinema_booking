@@ -1,8 +1,10 @@
 package com.cinema.booking.controller;
 
-import com.cinema.booking.model.User;
+import com.cinema.booking.model.UserPO;
 import com.cinema.booking.repository.UserRepository;
 
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,12 +26,15 @@ public class UserController {
 
     private final UserRepository userRepository;
 
-    private static final String HOME_PAGE_VIEW_NAME = "home-page";
-    private static final String LOGIN_PAGE_VIEW_NAME = "login-page";
-    private static final String REGISTER_PAGE_VIEW_NAME = "register-page";
-    private static final String LANDING_PAGE_VIEW_NAME = "landing-page";
-    private static final String PROFILE_PAGE_VIEW_NAME = "profile-page";
+    private static final String HOME_PAGE_VIEW_NAME = "home-page.html";
 
+    private static final String LOGIN_PAGE_VIEW_NAME = "login-page";
+
+    private static final String REGISTER_PAGE_VIEW_NAME = "register-page";
+
+    private static final String LANDING_PAGE_VIEW_NAME = "landing-page.html";
+
+    private static final String PROFILE_PAGE_VIEW_NAME = "profile-page";
     private static final String PROFILE_PAGE_MODEL_NAME = "profile";
 
     @GetMapping(HOME_PAGE) //Land to first page on webpage
@@ -38,18 +43,22 @@ public class UserController {
     }
 
     @GetMapping(LOGIN)
-    public ModelAndView getLoginPage() {
-        return new ModelAndView(LOGIN_PAGE_VIEW_NAME);
+    public ModelAndView getLoginPage(CsrfToken csrfToken) {
+        return new ModelAndView(LOGIN_PAGE_VIEW_NAME,
+                                "token", csrfToken.getToken());
     }
+//    NO LONGER REQUIRED AS 'WebSecurityConfig' has now thr POST logic on line 28
 
-    @PostMapping(LOGIN) //@GetMapping tells Maven that this code should be used to handle a specific GET request.
-    public ModelAndView login() {
-        return new ModelAndView(LANDING_PAGE_VIEW_NAME) ;
-    }
+//    @PostMapping(LOGIN) //@GetMapping tells Maven that this code should be used to handle a specific GET request.
+//    public ModelAndView login() {
+//        return new ModelAndView(LANDING_PAGE_VIEW_NAME) ;
+//    }
+//    NO LONGER REQUIRED AS 'WebSecurityConfig' has now thr POST logic on line 28
 
     @GetMapping(REGISTER)
-    public ModelAndView getRegisterPage() {
-        return new ModelAndView(REGISTER_PAGE_VIEW_NAME);
+    public ModelAndView getRegisterPage(CsrfToken csrfToken) {
+        return new ModelAndView(REGISTER_PAGE_VIEW_NAME,
+                                "token", csrfToken.getToken());
     }
 
     @PostMapping(REGISTER)
@@ -59,15 +68,15 @@ public class UserController {
                                      @RequestParam String name,
                                      @RequestParam Integer phoneNumber,
                                      @RequestParam String address) {
-        User user = new User();
-        user.setUserId(UUID.randomUUID().toString());
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setName(name);
-        user.setPhoneNumber(phoneNumber);
-        user.setAddress(address);
-        userRepository.save(user);
+        UserPO userPO = new UserPO();
+        userPO.setUserId(UUID.randomUUID().toString());
+        userPO.setUsername(username);
+        userPO.setPassword(password);
+        userPO.setEmail(email);
+        userPO.setName(name);
+        userPO.setPhoneNumber(phoneNumber);
+        userPO.setAddress(address);
+        userRepository.save(userPO);
         return new ModelAndView(HOME_PAGE_VIEW_NAME) ;
     }
 

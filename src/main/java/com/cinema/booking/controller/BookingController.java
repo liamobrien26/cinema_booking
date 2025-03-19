@@ -57,7 +57,7 @@ public class BookingController {
         booking.setSeats(seats);
         booking.setNumberOfTickets(numberOfTickets);
         booking.setTotalPrice(totalPrice);
-//        booking.setBookingStatus("Confirmed");
+        booking.setBookingStatus("Confirmed");
         booking.setBookingCreatedDate(formatBookingCreatedDate());
         bookingRepository.save(booking);
         return new ModelAndView(CREATE_NEW_BOOKING_VIEW_NAME);
