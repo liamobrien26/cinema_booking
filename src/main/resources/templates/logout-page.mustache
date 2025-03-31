@@ -4,9 +4,10 @@
   <title>Log out</title>
 </head>
 <body>
-<h1>Are you sure you want to log out?</h1>
 
-<p>Log out<a href="logout">Click Here</a></p>
-<input type="hidden" name="_csrf" value="{{token}}"/>
+<form action="/logout" method="post">
+  <input type="hidden" name="_csrf" value="{{token}}">
+  <button type="submit">Log Out</button>
+</form>
 </body>
 </html>

@@ -91,15 +91,4 @@ public class UserController {
     public ModelAndView getLandingPage(CsrfToken csrfToken) {
         return new ModelAndView(LANDING_PAGE_VIEW_NAME, "token", csrfToken.getToken());
     }
-
-
-    @GetMapping(LOG_OUT)
-    public ModelAndView getLogOut(CsrfToken csrfToken) {
-        return new ModelAndView(LOGOUT_VIEW_NAME, "token", csrfToken.getToken());
-    }
-
-    @PostMapping(LOG_OUT)
-    public ModelAndView logOut(CsrfToken csrfToken) {
-        return new ModelAndView(HOME_PAGE_VIEW_NAME,"token", csrfToken.getToken());
-    }
 }
