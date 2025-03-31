@@ -16,6 +16,7 @@ public final class Urls {
     public static final String GET_ALL_BOOKINGS = "/get-all-bookings";
     public static final String GET_BOOKING_BY_BOOKING_ID = "/get-booking-by-booking-id";
     public static final String CANCEL_BOOKING = "/cancel-booking";
+
 }
 
 

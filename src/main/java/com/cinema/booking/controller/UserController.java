@@ -3,7 +3,6 @@ package com.cinema.booking.controller;
 import com.cinema.booking.model.UserPO;
 import com.cinema.booking.repository.UserRepository;
 
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,13 +25,14 @@ public class UserController {
 
     private final UserRepository userRepository;
 
-    private static final String HOME_PAGE_VIEW_NAME = "home-page.html";
+    private static final String HOME_PAGE_VIEW_NAME = "home-page";
+    private static final String LOGOUT_VIEW_NAME = "logout-page";
 
     private static final String LOGIN_PAGE_VIEW_NAME = "login-page";
 
     private static final String REGISTER_PAGE_VIEW_NAME = "register-page";
 
-    private static final String LANDING_PAGE_VIEW_NAME = "landing-page.html";
+    private static final String LANDING_PAGE_VIEW_NAME = "landing-page";
 
     private static final String PROFILE_PAGE_VIEW_NAME = "profile-page";
     private static final String PROFILE_PAGE_MODEL_NAME = "profile";
@@ -88,12 +88,17 @@ public class UserController {
     }
 
     @GetMapping(LANDING_PAGE)
-    public ModelAndView getLandingPage() {
-        return new ModelAndView(LANDING_PAGE_VIEW_NAME);
+    public ModelAndView getLandingPage(CsrfToken csrfToken) {
+        return new ModelAndView(LANDING_PAGE_VIEW_NAME, "token", csrfToken.getToken());
+    }
+
+    @GetMapping(LOG_OUT)
+    public ModelAndView getLogOut(CsrfToken csrfToken) {
+        return new ModelAndView(LOGOUT_VIEW_NAME, "token", csrfToken.getToken());
     }
 
     @PostMapping(LOG_OUT)
-    public ModelAndView logout() {
-        return new ModelAndView(HOME_PAGE_VIEW_NAME);
+    public ModelAndView logOut(CsrfToken csrfToken) {
+        return new ModelAndView(HOME_PAGE_VIEW_NAME,"token", csrfToken.getToken());
     }
 }

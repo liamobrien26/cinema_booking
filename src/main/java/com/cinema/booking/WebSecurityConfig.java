@@ -10,6 +10,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import static com.cinema.booking.properties.Urls.HOME_PAGE;
 import static com.cinema.booking.properties.Urls.LANDING_PAGE;
 import static com.cinema.booking.properties.Urls.LOGIN;
+import static com.cinema.booking.properties.Urls.LOG_OUT;
 import static com.cinema.booking.properties.Urls.REGISTER;
 
 @Configuration
@@ -27,7 +28,13 @@ public class WebSecurityConfig {
                 .loginPage(LOGIN).permitAll()
                 .defaultSuccessUrl(LANDING_PAGE) //Handles POST REQUEST
             )
-            .logout(LogoutConfigurer::permitAll);
+            .logout(logout -> logout
+                .logoutUrl(LOG_OUT)
+                .logoutSuccessUrl(HOME_PAGE)
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll() //Allows all users to access particular endpoint without any restrictions
+            );
 
         return http.build();
     }
