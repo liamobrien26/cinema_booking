@@ -18,8 +18,9 @@
   </ul>
 {{/profile}}
 
-<p><a href="/">Log out</a></p>
-<p><a href="landing-page">Back to home page</a></p>
-
+<form action="/logout" method="post">
+    <input type="hidden" name="_csrf" value="{{token}}">
+    <button type="submit">Log Out</button>
+</form>
 </body>
 </html>

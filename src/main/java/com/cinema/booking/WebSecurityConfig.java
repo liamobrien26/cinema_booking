@@ -4,50 +4,38 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static com.cinema.booking.properties.Urls.HOME_PAGE;
-import static com.cinema.booking.properties.Urls.LANDING_PAGE;
-import static com.cinema.booking.properties.Urls.LOGIN;
-import static com.cinema.booking.properties.Urls.LOG_OUT;
-import static com.cinema.booking.properties.Urls.REGISTER;
+import static com.cinema.booking.properties.Urls.*;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig {
 
     @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // BCrypt is a strong password algorithm
+    }
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(requests -> requests
-                        .requestMatchers(HOME_PAGE, REGISTER).permitAll() // Allow these without login
-                        .anyRequest().authenticated()
+                        .requestMatchers(HOME_PAGE, REGISTER).permitAll()  // Allow access to home page and register page
+                        .anyRequest().authenticated() // All other requests need to be logged in
                 )
                 .formLogin(form -> form
-                        .loginPage(LOGIN).permitAll()
-                        .defaultSuccessUrl(LANDING_PAGE, true) // Force redirect to LANDING_PAGE after login
+                        .loginPage(LOGIN).permitAll()  // Custom login page
+                        .defaultSuccessUrl(LANDING_PAGE, true)  // Force redirect to LANDING_PAGE after login
+                        .failureUrl(LOGIN_ERROR_URL)  // Redirect to login page with error parameter on failure
                 )
                 .logout(logout -> logout
-                        .logoutUrl(LOG_OUT)
-                        .logoutSuccessUrl(HOME_PAGE)
-                        .invalidateHttpSession(true)
-                        .deleteCookies("JSESSIONID")
-                        .permitAll() //Allows all users to access particular endpoint without any restrictions
+                        .logoutUrl(LOG_OUT)  // URL for logout
+                        .logoutSuccessUrl(HOME_PAGE)  // Redirect to home page after successful logout
+                        .permitAll()  // Allow all users to access logout endpoint without restrictions
                 );
-
         return http.build();
     }
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user =
-//            User.withDefaultPasswordEncoder()
-//                .username("user")
-//                .password("password")
-//                .roles("USER")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
 }

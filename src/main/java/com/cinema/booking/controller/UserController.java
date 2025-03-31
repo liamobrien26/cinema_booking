@@ -3,6 +3,7 @@ package com.cinema.booking.controller;
 import com.cinema.booking.model.UserPO;
 import com.cinema.booking.repository.UserRepository;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import static com.cinema.booking.properties.Urls.HOME_PAGE;
 import static com.cinema.booking.properties.Urls.LANDING_PAGE;
 import static com.cinema.booking.properties.Urls.LOGIN;
-import static com.cinema.booking.properties.Urls.LOG_OUT;
 import static com.cinema.booking.properties.Urls.PROFILE;
 import static com.cinema.booking.properties.Urls.REGISTER;
 
@@ -24,9 +24,9 @@ import static com.cinema.booking.properties.Urls.REGISTER;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     private static final String HOME_PAGE_VIEW_NAME = "home-page";
-    private static final String LOGOUT_VIEW_NAME = "logout-page";
 
     private static final String LOGIN_PAGE_VIEW_NAME = "login-page";
 
@@ -43,22 +43,23 @@ public class UserController {
     }
 
     @GetMapping(LOGIN)
-    public ModelAndView getLoginPage(CsrfToken csrfToken) {
-        return new ModelAndView(LOGIN_PAGE_VIEW_NAME,
-                                "token", csrfToken.getToken());
-    }
-//    NO LONGER REQUIRED AS 'WebSecurityConfig' has now thr POST logic on line 28
+    public ModelAndView getLoginPage(@RequestParam(value = "error", required = false) String error, CsrfToken csrfToken) {
+        ModelAndView modelAndView = new ModelAndView(LOGIN_PAGE_VIEW_NAME);
 
-//    @PostMapping(LOGIN) //@GetMapping tells Maven that this code should be used to handle a specific GET request.
-//    public ModelAndView login() {
-//        return new ModelAndView(LANDING_PAGE_VIEW_NAME) ;
-//    }
-//    NO LONGER REQUIRED AS 'WebSecurityConfig' has now thr POST logic on line 28
+        // If there's an error, pass the error message to the model
+        if (error != null) {
+            modelAndView.addObject("error", "Invalid username or password");
+        }
+
+        modelAndView.addObject("token", csrfToken.getToken());
+        return modelAndView;
+    }
+
 
     @GetMapping(REGISTER)
     public ModelAndView getRegisterPage(CsrfToken csrfToken) {
         return new ModelAndView(REGISTER_PAGE_VIEW_NAME,
-                                "token", csrfToken.getToken());
+                "token", csrfToken.getToken());
     }
 
     @PostMapping(REGISTER)
@@ -71,20 +72,21 @@ public class UserController {
         UserPO userPO = new UserPO();
         userPO.setUserId(UUID.randomUUID().toString());
         userPO.setUsername(username);
-        userPO.setPassword(password);
+        // Hash the password using the PasswordEncoder before saving it
+        userPO.setPassword(passwordEncoder.encode(password));  // Use the PasswordEncoder to hash the password
         userPO.setEmail(email);
         userPO.setName(name);
         userPO.setPhoneNumber(phoneNumber);
         userPO.setAddress(address);
         userRepository.save(userPO);
-        return new ModelAndView(HOME_PAGE_VIEW_NAME) ;
+        return new ModelAndView(HOME_PAGE_VIEW_NAME);
     }
 
     @GetMapping(PROFILE)
     public ModelAndView getProfile() {
         return new ModelAndView(PROFILE_PAGE_VIEW_NAME,
-                                PROFILE_PAGE_MODEL_NAME,
-                                userRepository.findAll());
+                PROFILE_PAGE_MODEL_NAME,
+                userRepository.findAll());
     }
 
     @GetMapping(LANDING_PAGE)

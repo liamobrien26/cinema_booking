@@ -32,8 +32,10 @@
   <button type="reset">Reset</button>
 </form>
 
-<p><a href="/">Log out</a></p>
-<p>Home page <a href="landing-page">Click Here</a></p>
+<form action="/logout" method="post">
+    <input type="hidden" name="_csrf" value="{{token}}">
+    <button type="submit">Log Out</button>
+</form>
 
 
 </body>

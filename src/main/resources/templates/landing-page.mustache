@@ -8,11 +8,15 @@
 <h1>Welcome to MyCinema</h1>
 
 <form action="landing-page" method="post">
-  <p><a href="logout">Log out</a></p>
   <p><a href="profile">Click here to see profile</a></p>
   <p><a href="view-movie">Click here to view all movies</a></p>
   <p><a href="create-new-booking">Click here make a booking</a></p>
   <input type="hidden" name="_csrf" value="{{token}}"/>
+</form>
+
+<form action="/logout" method="post">
+    <input type="hidden" name="_csrf" value="{{token}}">
+    <button type="submit">Log Out</button>
 </form>
 
 <br>

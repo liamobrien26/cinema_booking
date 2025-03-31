@@ -23,7 +23,9 @@ This Java/Spring Boot project is developed for Cinema Booking.
     - Navigate to [http://localhost:8080/movies](http://localhost:8080/movies) to access the application.
 
 **STEPS TO TAKE NEXT**
+
 --DTO
---Explain how - VIEW_NAME & MODEL_NAME works
+
+--Explain how VIEW_NAME & MODEL_NAME works
+
 --Explain tokens
---Add log out feature

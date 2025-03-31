@@ -6,6 +6,11 @@
 <body>
 <h1>Login</h1>
 
+<!-- If there's an error, display the message -->
+{{#error}}
+    <p style="color: red;">{{error}}</p>
+{{/error}}
+
 <form action="/login" method="post">
     <input type="hidden" name="_csrf" value="{{token}}">
     <label for="username">Username:</label>
