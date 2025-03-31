@@ -20,21 +20,21 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests(requests -> requests
-                .requestMatchers(HOME_PAGE, REGISTER).permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form
-                .loginPage(LOGIN).permitAll()
-                .defaultSuccessUrl(LANDING_PAGE) //Handles POST REQUEST
-            )
-            .logout(logout -> logout
-                .logoutUrl(LOG_OUT)
-                .logoutSuccessUrl(HOME_PAGE)
-                .invalidateHttpSession(true)
-                .deleteCookies("JSESSIONID")
-                .permitAll() //Allows all users to access particular endpoint without any restrictions
-            );
+                .authorizeHttpRequests(requests -> requests
+                        .requestMatchers(HOME_PAGE, REGISTER).permitAll() // Allow these without login
+                        .anyRequest().authenticated()
+                )
+                .formLogin(form -> form
+                        .loginPage(LOGIN).permitAll()
+                        .defaultSuccessUrl(LANDING_PAGE, true) // Force redirect to LANDING_PAGE after login
+                )
+                .logout(logout -> logout
+                        .logoutUrl(LOG_OUT)
+                        .logoutSuccessUrl(HOME_PAGE)
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll() //Allows all users to access particular endpoint without any restrictions
+                );
 
         return http.build();
     }

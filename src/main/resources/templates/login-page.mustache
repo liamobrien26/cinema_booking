@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Login page</title>
+    <title>Login</title>
 </head>
 <body>
+<h1>Login</h1>
 
 <form action="/login" method="post">
-  <div><label> Username : <input type="text" name="username"/> </label></div>
-  <div><label> Password: <input type="password" name="password"/> </label></div>
-  <input type="hidden" name="_csrf" value="{{token}}"/>
-  <div><input type="submit" value="Sign In"/></div>
+    <input type="hidden" name="_csrf" value="{{token}}">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+
+    <button type="submit">Login</button>
+
+</form>
+
+<form action="/" method="get">
+    <button type="submit">Back to Home Page</button>
 </form>
 </body>
 </html>
-
