@@ -39,3 +39,5 @@ public class WebSecurityConfig {
         return http.build();
     }
 }
+//todo need to add some of these pages as admin only pages
+//Line 27 currently allows anyone logged in to see any page
