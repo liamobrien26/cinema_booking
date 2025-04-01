@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>MyCinema</title>
+    <meta charset="UTF-8">
+    <title>MyCinema</title>
 </head>
-<body>
 <h1>Profile</h1>
 
 {{#profile}}
-  <ul>
-    <li>
-      <p>Username: {{username}}</p>
-      <p>Name: {{name}}</p>
-      <p>Phone number: {{phoneNumber}}</p>
-      <p>Address: {{address}}</p>
-    </li>
-  </ul>
+    <ul>
+        <li>
+            <p>Username: {{username}}</p>
+            <p>Name: {{name}}</p>
+            <p>Phone number: {{phoneNumber}}</p>
+            <p>Address: {{address}}</p>
+        </li>
+    </ul>
 {{/profile}}
 
 <form action="/logout" method="post">
@@ -27,6 +25,5 @@
         <button type="button">Back to Home</button>
     </a>
 
+</form>
 
-</body>
-</html>
