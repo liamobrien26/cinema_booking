@@ -27,15 +27,12 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
 
     private static final String HOME_PAGE_VIEW_NAME = "home-page";
-
     private static final String LOGIN_PAGE_VIEW_NAME = "login-page";
-
     private static final String REGISTER_PAGE_VIEW_NAME = "register-page";
-
     private static final String LANDING_PAGE_VIEW_NAME = "landing-page";
-
     private static final String PROFILE_PAGE_VIEW_NAME = "profile-page";
     private static final String PROFILE_PAGE_MODEL_NAME = "profile";
+    private static final String CSRF_TOKEN_KEY = "token";
 
     @GetMapping(HOME_PAGE) //Land to first page on webpage
     public ModelAndView homePage() {
@@ -51,7 +48,7 @@ public class UserController {
             modelAndView.addObject("error", "Invalid username or password");
         }
 
-        modelAndView.addObject("token", csrfToken.getToken());
+        modelAndView.addObject(CSRF_TOKEN_KEY, csrfToken.getToken());
         return modelAndView;
     }
 
@@ -59,7 +56,7 @@ public class UserController {
     @GetMapping(REGISTER)
     public ModelAndView getRegisterPage(CsrfToken csrfToken) {
         return new ModelAndView(REGISTER_PAGE_VIEW_NAME,
-                "token", csrfToken.getToken());
+                CSRF_TOKEN_KEY, csrfToken.getToken());
     }
 
     @PostMapping(REGISTER)
@@ -82,11 +79,23 @@ public class UserController {
         return new ModelAndView(HOME_PAGE_VIEW_NAME);
     }
 
+//    @GetMapping(PROFILE)
+//    public ModelAndView getProfile(CsrfToken csrfToken) {
+//        return new ModelAndView(PROFILE_PAGE_VIEW_NAME,
+//                PROFILE_PAGE_MODEL_NAME,
+//                userRepository.findAll());
+//    }
+
     @GetMapping(PROFILE)
-    public ModelAndView getProfile() {
-        return new ModelAndView(PROFILE_PAGE_VIEW_NAME,
-                PROFILE_PAGE_MODEL_NAME,
-                userRepository.findAll());
+    public ModelAndView getProfile(CsrfToken csrfToken) {
+        ModelAndView modelAndView = new ModelAndView(PROFILE_PAGE_VIEW_NAME); //Create a ModelAndView Object
+//userRepository.findAll() → Fetches all user records from the database.
+//PROFILE_PAGE_MODEL_NAME ("profile") → This is the key used in the template.
+//The template can now access user data like {{profile.username}}
+        modelAndView.addObject(PROFILE_PAGE_MODEL_NAME, userRepository.findAll());
+        modelAndView.addObject(CSRF_TOKEN_KEY, csrfToken.getToken());
+
+        return modelAndView; //Spring MVC renders the template with the data I added to the model.
     }
 
     @GetMapping(LANDING_PAGE)
