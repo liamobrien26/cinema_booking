@@ -24,7 +24,15 @@ This Java/Spring Boot project is developed for Cinema Booking.
 
 **STEPS TO TAKE NEXT**
 
---DTO
+--Add validation on register page (e.g. enter phone number if blank, etc.)
+
+--Add Admin role, will need to create a field for user roles in the database. (line 26 on UserDetailsService is where I can add roles)
+
+--Mustache: add partials, layout templates, etc. (e.g. header, footer, etc.) Read through documentation for mustache to understand how it works.
+
+--TESTS: Unit testing, component testing, black box testing, acceptance test(rendering page tests), etc.
+
+--DTO (Later stage)
 
 --Explain how VIEW_NAME & MODEL_NAME works
 
