@@ -65,7 +65,7 @@ public class UserController {
     @PostMapping(REGISTER)
     public ModelAndView registerUser(@Valid @ModelAttribute RegisterUserDTO dto, BindingResult result) {
         if (result.hasErrors()) {
-            return new ModelAndView(REGISTER)
+            return new ModelAndView(REGISTER_PAGE_VIEW_NAME)
                 .addObject("errors", result.getAllErrors()) //Pass validation errors
                 .addObject("registerDTO", dto); //Pass the DTO to pre-fill the form
         }

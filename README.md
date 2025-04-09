@@ -40,3 +40,5 @@ This Java/Spring Boot project is developed for Cinema Booking.
 --Explain how VIEW_NAME & MODEL_NAME works
 
 --Explain tokens
+
+--FIX REGISTER 
