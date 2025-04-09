@@ -26,7 +26,6 @@ public class MovieController {
 
     private static final String ADD_MOVIE_VIEW_NAME = "add-movie-page";
     private static final String VIEW_MOVIE_VIEW_NAME = "view-movie-page";
-
     private static final String VIEW_MOVIE_MODEL_NAME = "movies"; //Get object from database
 
     @GetMapping(VIEW_MOVIE)

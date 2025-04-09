@@ -16,9 +16,12 @@ This Java/Spring Boot project is developed for Cinema Booking.
 1. **Build and Run the Application:**
     - Use Maven to build the project and start the server:
       'mvn spring-boot:run'
+
+2. **Connect to Mongo**
+   - 'docker-compose.yml' and click on the play button
      
 
-2. **Access the Application:**
+3. **Access the Application:**
     - Open a web browser.
     - Navigate to [http://localhost:8080/movies](http://localhost:8080/movies) to access the application.
 
