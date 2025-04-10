@@ -1,79 +1,95 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--  <meta charset="UTF-8">-->
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--  <title>Register</title>-->
+<!--</head>-->
+
+<!--<body>-->
+<!--<h1>Register</h1>-->
+<!--<form action="/register" method="post">-->
+<!--  <label for="username">Username:</label>-->
+<!--  <input type="text" id="username" name="username" value="{{!{{registerUserDTO.username}}}}" required>-->
+<!--  <br>-->
+
+<!--  <label for="password">Password:</label>-->
+<!--  <input type="password" id="password" name="password" value="{{!{{registerUserDTO.password}}}}" required>-->
+<!--  <br>-->
+
+<!--  <label for="email">Email:</label>-->
+<!--  <input type="email" id="email" name="email" value="{{!{{registerUserDTO.email}}}}">-->
+<!--  <br>-->
+
+<!--  <label for="name">Name:</label>-->
+<!--  <input type="text" id="name" name="name" value="{{!{{registerUserDTO.name}}}}">-->
+<!--  <br>-->
+
+
+<!--  <label for="phoneNumber">Phone number:</label>-->
+<!--  <input type="number" id="phoneNumber" name="phoneNumber" value="{{!{{registerUserDTO.phoneNumber}}}}">-->
+<!--  <br>-->
+
+
+<!--  <label for="address">Address:</label>-->
+<!--  <input type="text" id="address" name="address" value="{{!{{registerUserDTO.address}}}}">-->
+<!--  <br>-->
+
+
+<!--  <input type="hidden" name="_csrf" value="{{!{{_csrf.token}}}}"/>-->
+<!--  <button type="submit">Register</button>-->
+<!--</form>-->
+
+<!--<p>Have an account with us? <a href="login">Log in here</a></p>-->
+<!--<form action="/" method="get">-->
+<!--  <button type="submit">Back to Home Page</button>-->
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
+
 </head>
 <body>
 <h1>Register</h1>
+
 <form action="/register" method="post">
   <label for="username">Username:</label>
-  <input type="text" id="username" name="username" value="{{registerDTO.username}}" required>
+  <input type="text" id="username" name="username" required>
   <br>
-  {{#errors}}
-    {{#fieldErrors}}
-      {{#isField "username"}}  <!-- Check if the error is related to the username -->
-        <div style="color: red;">{{message}}</div>
-      {{/isField}}
-    {{/fieldErrors}}
-  {{/errors}}
+
   <label for="password">Password:</label>
-  <input type="password" id="password" name="password" value="{{registerDTO.password}}" required>
+  <input type="password" id="password" name="password" required>
   <br>
-  {{#errors}}
-    {{#fieldErrors}}
-      {{#isField "password"}}
-        <div style="color: red;">{{message}}</div>
-      {{/isField}}
-    {{/fieldErrors}}
-  {{/errors}}
+
   <label for="email">Email:</label>
-  <input type="email" id="email" name="email" value="{{registerDTO.email}}">
+  <input type="email" id="email" name="email">
   <br>
-  {{#errors}}
-    {{#fieldErrors}}
-      {{#isField "email"}}
-        <div style="color: red;">{{message}}</div>
-      {{/isField}}
-    {{/fieldErrors}}
-  {{/errors}}
+
   <label for="name">Name:</label>
-  <input type="text" id="name" name="name" value="{{registerDTO.name}}">
+  <input type="text" id="name" name="name">
   <br>
-  {{#errors}}
-    {{#fieldErrors}}
-      {{#isField "name"}}
-        <div style="color: red;">{{message}}</div>
-      {{/isField}}
-    {{/fieldErrors}}
-  {{/errors}}
+
   <label for="phoneNumber">Phone number:</label>
-  <input type="number" id="phoneNumber" name="phoneNumber" value="{{registerDTO.phoneNumber}}">
+  <input type="number" id="phoneNumber" name="phoneNumber">
   <br>
-  {{#errors}}
-    {{#fieldErrors}}
-      {{#isField "phoneNumber"}}
-        <div style="color: red;">{{message}}</div>
-      {{/isField}}
-    {{/fieldErrors}}
-  {{/errors}}
+
   <label for="address">Address:</label>
-  <input type="text" id="address" name="address" value="{{registerDTO.address}}">
+  <input type="text" id="address" name="address">
   <br>
-  {{#errors}}
-    {{#fieldErrors}}
-      {{#isField "address"}}
-        <div style="color: red;">{{message}}</div>
-      {{/isField}}
-    {{/fieldErrors}}
-  {{/errors}}
-  <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+
+  <input type="hidden" name="_csrf" value="{{token}}"/>
   <button type="submit">Register</button>
 </form>
+
 <p>Have an account with us? <a href="login">Log in here</a></p>
+
 <form action="/" method="get">
   <button type="submit">Back to Home Page</button>
+  <button type="submit">Back to Home Page</button>
 </form>
+
 </body>
 </html>

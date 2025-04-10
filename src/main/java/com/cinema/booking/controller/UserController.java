@@ -62,22 +62,43 @@ public class UserController {
                                 CSRF_TOKEN_KEY, csrfToken.getToken());
     }
 
-    @PostMapping(REGISTER)
-    public ModelAndView registerUser(@Valid @ModelAttribute RegisterUserDTO dto, BindingResult result) {
-        if (result.hasErrors()) {
-            return new ModelAndView(REGISTER_PAGE_VIEW_NAME)
-                .addObject("errors", result.getAllErrors()) //Pass validation errors
-                .addObject("registerDTO", dto); //Pass the DTO to pre-fill the form
-        }
+//    @PostMapping(REGISTER)
+//    public ModelAndView registerUser(@Valid @ModelAttribute RegisterUserDTO dto, BindingResult result) {
+//        if (result.hasErrors()) {
+//            return new ModelAndView(REGISTER_PAGE_VIEW_NAME)
+//                .addObject("errors", result.getAllErrors()) //Pass validation errors
+//                .addObject("registerUserDTO", dto); //Pass the DTO to pre-fill the form
+//        }
+//
+//        UserPO userPO = new UserPO();
+//        userPO.setUserId(UUID.randomUUID().toString());
+//        userPO.setUsername(dto.getUsername());
+//        userPO.setPassword(passwordEncoder.encode(dto.getPassword()));  // Use the PasswordEncoder to hash the password
+//        userPO.setEmail(dto.getEmail());
+//        userPO.setName(dto.getName());
+//        userPO.setPhoneNumber(dto.getPhoneNumber());
+//        userPO.setAddress(dto.getAddress());
+//
+//        userRepository.save(userPO);
+//        return new ModelAndView(HOME_PAGE_VIEW_NAME);
+//    }
+
+    @PostMapping
+    public ModelAndView registerUser(@RequestParam String username,
+                                     @RequestParam String password,
+                                     @RequestParam String email,
+                                     @RequestParam String name,
+                                     @RequestParam Integer phoneNumber,
+                                     @RequestParam String address) {
 
         UserPO userPO = new UserPO();
         userPO.setUserId(UUID.randomUUID().toString());
-        userPO.setUsername(dto.getUsername());
-        userPO.setPassword(passwordEncoder.encode(dto.getPassword()));  // Use the PasswordEncoder to hash the password
-        userPO.setEmail(dto.getEmail());
-        userPO.setName(dto.getName());
-        userPO.setPhoneNumber(dto.getPhoneNumber());
-        userPO.setAddress(dto.getAddress());
+        userPO.setUsername(username);
+        userPO.setPassword(passwordEncoder.encode(password));  // Use the PasswordEncoder to hash the password
+        userPO.setEmail(email);
+        userPO.setName(name);
+        userPO.setPhoneNumber(phoneNumber);
+        userPO.setAddress(address);
 
         userRepository.save(userPO);
         return new ModelAndView(HOME_PAGE_VIEW_NAME);

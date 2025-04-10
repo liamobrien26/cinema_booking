@@ -29,4 +29,6 @@ public class RegisterUserDTO {
     @NotBlank(message = "Address is required")
     private String address;
 
+
 }
+
